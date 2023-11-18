@@ -1,0 +1,78 @@
+//************* MIXIN ************// 
+
+@mixin circle ($size, $color) {
+  width: $size;
+  height: $size;
+  border: $size/20 solid $color;
+  border-radius: 50%;
+  box-shadow: $size/36 $size/24 $size/17 $color;
+}
+
+@mixin ring ($size, $color) {
+  height: $size;
+  width: $size;
+  border: calc(#{$size}/8) solid $color;
+  border-radius: 50%;
+  box-shadow: $size/35 $size/25 $size/18 #535353;
+  background-color: transparent;
+  margin: calc(#{$size}*0.2);
+  position: relative;
+  display: inline-block;
+}
+
+//******************************//
+
+//************* ALL ************//
+
+*{
+  font-family:'Courier New', Courier, monospace;
+  font-size: xx-large;
+  font-weight: lighter
+}
+//******************************//
+
+//******* CIRCLE 1 AND 2 *******//
+
+.circle-one {
+  @include circle(100px, rgb(255, 115, 0));
+}
+
+.circle-two {
+  @include circle(200px, orange);
+}
+
+.my-precious, .one-ring, .six-rings {
+  width: 80%;
+  margin: 80px auto;
+}
+
+.my-precious, .one-ring {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+//****************************//
+
+//********* SIX RINGS ********//
+
+.six-rings {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.six-rings span {
+  display: flex;
+  align-items: center;
+}
+
+@for $i from 1 through 6 {
+  .six-rings span:nth-child(#{$i}) {
+    @include ring(calc(#{$i}*10px), #353535);
+    z-index: $i;
+    margin-right: calc(#{-$i}*8px);
+  }
+}
+
+//**************************//
